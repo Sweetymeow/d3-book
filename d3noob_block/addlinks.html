@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="../d3/d3.v3.js"></script>
+    </head>
+    <body>
+        <div>
+        </div>
+        <script type="text/javascript">
+            console.log("find d3.v3.js file");
+            // Your beautiful D3 code will go here
+            var width = 449,
+                height = 249,
+                word = "d3noob_Block";
+            
+            var linkRectX = 100,
+                linkRectY = 50,
+                rectWidth = 200,
+                rectHeight = 100;
+            
+            var linkholder = d3.select("div")
+                    .append("svg")
+                    .attr("width",width)
+                    .attr("height",height)
+            
+            /*
+            holder.append("a")
+                .attr("xlink:href", "http://en.wikipedia.org/wiki/"+word)
+            */
+            // Draw a rectangle
+            linkholder.append("a")
+                .attr("xlink:href", "http://bl.ocks.org/d3noob")
+                .append("rect")
+                .attr("x", linkRectX)
+                .attr("y", linkRectY)
+                .attr("height", rectHeight)
+                .attr("width", rectWidth)
+                .style("fill", "lightred")
+                .attr("rx", 6)
+                .attr("ry", 6);
+            
+            /*
+            style : sets the CSS style property
+            attr :  sets the attribute with the specified / HTML 
+            */
+            
+            linkholder.append("text")
+                .attr("x", linkRectX+rectWidth/2)
+                .attr("y", linkRectY+rectHeight/2)
+                .style("fill", "white") 
+                .style("font-size", "1.5em")
+                .attr("dy", ".35em")
+                .attr("text-anchor", "middle")
+                .style("pointer-events", "none")
+                .text(word);
+            
+        </script>
+    </body>
+</html>

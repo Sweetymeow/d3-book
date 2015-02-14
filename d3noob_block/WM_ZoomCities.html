@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="../d3/d3.v3.js"></script>
+        <script type="text/javascript" src="../d3/topojson.js"></script>  
+        <style>            
+            path {
+              stroke: white;
+              stroke-width: 0.25px;
+                stro
+              fill: grey;
+            }
+            div.map{
+                border: 2px solid rgba(255, 99, 99, 0.46);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="map">
+        </div>
+        <script type="text/javascript">
+            console.log("find d3.v3.js file");
+            // Your beautiful D3 code will go here
+            var width = 960,
+                height = 600;
+            
+            var projection = d3.geo.mercator()
+            .center([0, 5])
+            .scale(200)
+            .rotate([-180, 0]);
+            
+            var svg = d3.select("div.map").append("svg")
+                .attr("width", width)
+                .attr("height", height);
+            
+            var path = d3.geo.path()
+                .projection(projection);
+            
+            //load and display the world
+            d3.json("world-110m2.json", function(error, topology){
+                
+            })
+            
+            
+            
+            
+        </script>
+    </body>
+</html>

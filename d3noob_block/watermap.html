@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"></meta>
+    <title> Mollweide Watercolour </title>
+    <style> 
+        @import url(../../maps.css);
+        #map {
+          position: relative;
+          margin: 0 auto;
+          overflow: hidden;
+        }
+
+        .tile { position: absolute; }
+    </style>
+</head>
+<body>
+    <h1>Mollweide Watercolour</h1>
+    <div id="map"> </div>
+    <div class="wrapper">
+        <p>Zoomable watercolour map on a Mollweide equal-area projection, inspired by Calvin Metcalf. </p>
+        <p class="caption">Map tiles by<a href="http://stamen.com"></a>, under CC By 3.0.</p>
+        <p class="caption">Data by 
+            <a href="http://openstreetmap.org">OpenStreetMap</a>
+            , under 
+            <a href="http://creativecommons.org/licenses/by-sa/3.0">CC                                  <span id="transmark"></span> BY SA</a>
+            .</p>
+    </div>
+
+    <script src="../../../d3.min.js"></script>
+    <script src="../../d3.geo.projection.min.js"></script>
+    <script src="../../topojson.min.js"></script>
+    <script src="../../d3.quadtiles.js"></script>
+    <script src="../d3.geo.raster.js"></script>
+    <script>
+        // http://www.jasondavies.com/maps/raster/mollweide/
+        var ratio = window.devicePixelRatio || 1,
+            width = 1000 * ratio,
+            height = 500 * ratio,
+            p = .5 * ratio;
+
+        var projection = d3.geo.mollweide()
+            .scale(175 * ratio)
+            .translate([width / 2, height / 2])
+            .clipExtent([[p, p], [width - p, height - p]]);
+
+        var raster = d3.geo.raster(projection)
+            .url("http://{subdomain}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg");
+
+        var layer = d3.select("#map")
+            .style("width", width / ratio + "px")
+            .style("height", height / ratio + "px")
+            .call(d3.behavior.zoom()
+              .translate([.5 * width / ratio, .5 * height / ratio])
+              .scale(projection.scale() / ratio)
+              .scaleExtent([150, 1e8])
+              .on("zoom", function() {
+                var t = d3.event.translate,
+                    s = d3.event.scale;
+                projection.translate([t[0] * ratio, t[1] * ratio]).scale(s * ratio);
+                layer.call(raster);
+              }))
+          .append("div")
+            .style(prefix + "transform", "scale(" + 1 / ratio + ")")
+            .style(prefix + "transform-origin", "0 0 0")
+          .append("div")
+            .style(prefix + "transform-origin", "0 0 0")
+            .call(raster);
+
+        </script>
+    </body>
+</html>

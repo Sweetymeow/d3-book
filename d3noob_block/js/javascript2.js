@@ -42,17 +42,17 @@ d3.json("data/countries.geo.json", function(error, json) {
                 reporter(d);
             });
 
-        states2.selectAll("path")
-            .data(world)
-          .enter().append("svg:path")
-            .attr("d", path)
-            .attr("class", function(d,i) { return "country" + d.id; });
-
-        states3.selectAll("path")
-            .data(world)
-          .enter().append("svg:path")
-            .attr("d", path)
-            .attr("class", function(d,i) { return "country" + d.id; });
+//        states2.selectAll("path")
+//            .data(world)
+//          .enter().append("svg:path")
+//            .attr("d", path)
+//            .attr("class", function(d,i) { return "country" + d.id; });
+//
+//        states3.selectAll("path")
+//            .data(world)
+//          .enter().append("svg:path")
+//            .attr("d", path)
+//            .attr("class", function(d,i) { return "country" + d.id; });
 
     })
 

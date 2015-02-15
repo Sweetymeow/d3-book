@@ -1,18 +1,17 @@
 var w = 945;
-
 var h = 550;
 
 var svg = d3.select('#content').append('svg').attr('width', w).attr('height', h);
 
 var projection = d3.geo.mercator()
         .scale(150)
-        .translate([w/2, h/2]);
+        .translate([w / 2, h / 2]);
 
 var path = d3.geo.path().projection(projection);
 
 var quantize = d3.scale.quantize()
     .domain([0, 1])
-    .range(d3.range(2).map(function(i) { return "tier" + i; }));
+    .range(d3.range(2).map(function(i){ return "tier" + i; }));
 
 var tierById = d3.map();
 
@@ -21,13 +20,9 @@ var csv;
 d3.json("data/countries.geo.json", function(error, json) {
 
     d3.csv("data/wod.csv", function(error, _csv) {
-
-        csv = _csv
-
+        csv = _csv;
         var world = json.features;
-
         // var world = topojson.feature(json, json.objects.countries).features;
-
         _csv.forEach(function(d, i) {
             world.forEach(function(e, j) {
                 if (d.name === e['properties']['name']) {

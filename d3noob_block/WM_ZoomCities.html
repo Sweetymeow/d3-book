@@ -23,6 +23,7 @@
         <script type="text/javascript">
             console.log("find d3.v3.js file");
             // Your beautiful D3 code will go here
+            
             var width = 960,
                 height = 600;
             
@@ -37,6 +38,8 @@
             
             var path = d3.geo.path()
                 .projection(projection);
+            
+            var g = svg.append("g");
             
             //load and display the world
             d3.json("world-110m2.json", function(error, topology){
